@@ -177,6 +177,23 @@ class TweetController {
       });
     }
   }
+ 
+  async searchTweets(req: any, res: express.Response): Promise<void> {
+    try {
+      const tweets = await TweetModel.find({"text": {$regex: req.query.q, $options: 'i'}}).populate('user').exec();
+
+      res.json({
+        status: "success",
+        data: tweets,
+      });
+    } catch (error) {
+      res.status(400).json({
+        status: "error",
+        message: error,
+      });
+    }
+  }
+
 }
 
 export const TweetCntrl = new TweetController();
