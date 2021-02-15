@@ -35,7 +35,6 @@ export const User = () => {
         dispatch(fetchTweets());
         if(userId) {
             AuthApi.getUserInfo(userId).then(({ data }) => {
-                console.log(data);
                 setUserData(data);
             });
         }
@@ -59,13 +58,13 @@ export const User = () => {
                 <Avatar />
                 <h2 className="user__info-fullname">{userData?.fullname}</h2>
                 <span className="user__info-username">@{userData?.username}</span>
-                <p className="user__info-description">Frontend Developer / ReactJS / NodeJS</p>
+                <p className="user__info-description">Description</p>
                 <ul className="user__info-details">
-                    <li>Baranovichi, Belarus</li>
-                    <li><a className="link" href="#">nastyatkach.im</a></li>
+                    <li>City, Country</li>
+                    <li><a className="link" href="#">website</a></li>
                     <br />
-                    <li>Дата рождения: 19 октября 1996 г.</li>
-                    <li>Регистрация: февраль 2020 г.</li>
+                    <li>Дата рождения: dateOfBirth</li>
+                    <li>Регистрация: dateOfRegistration</li>
                 </ul>
             </div>
             <Tabs
