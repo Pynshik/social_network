@@ -18,6 +18,11 @@ export const AuthApi = {
         return data;
     },
 
+    async signUpGoogle(postData: RegisterFormPropsInterface): Promise<ResponseAuthApiInterface> {
+        const {data} = await axios.post<ResponseAuthApiInterface>('http://localhost:8888/auth/google', { email: postData.email, username: postData.username, fullname: postData.fullname, avatarUrl: postData.avatarUrl });
+        return data;
+    },
+
     async getMe() {
         const {data} = await axios.get('http://localhost:8888/users/me');
         return data;
