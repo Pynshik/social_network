@@ -6,6 +6,7 @@ import PeopleIcon from '@material-ui/icons/PeopleOutline';
 import MessageIcon from '@material-ui/icons/ModeCommentOutlined';
 import { LoginModal } from './components/LoginModal';
 import { RegisterModal } from './components/RegisterModal';
+import { GoogleAuth } from '../../components/GoogleAuth';
 
 export const useStylesSignIn = makeStyles((theme) => ({
     wrapper: {
@@ -145,6 +146,7 @@ const SignIn: React.FC = (): React.ReactElement => {
                         color="primary">
                         Войти
                     </Button>
+                    <GoogleAuth />
                 <LoginModal open={visibleModal === 'signIn'} onClose={handleCloseModal} />
                 <RegisterModal open={visibleModal === 'signUp'} onClose={handleCloseModal} />
                 </div>
