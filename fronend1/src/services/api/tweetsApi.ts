@@ -19,5 +19,9 @@ export const TweetsApi = {
         const {data} = await axios.post<Response<TweetInterface>>('http://localhost:8888/tweets', payload);
         return data.data;
     },
+    async searchTweets(payload: string ): Promise<TweetInterface[]> {
+        const {data} = await axios.get<Response<TweetInterface[]>>('http://localhost:8888/tweets/search?q=' + payload);
+        return data.data;
+    },
     removeTweet: (id: string): Promise<void> => axios.delete('http://localhost:8888/tweets/' + id),
 }
