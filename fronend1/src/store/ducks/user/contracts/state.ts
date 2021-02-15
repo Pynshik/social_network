@@ -6,6 +6,7 @@ export interface UserInterface {
   fullname: string;
   username: string;
   password: string;
+  avatarUrl: string;
   location: string;
   about: string;
   website: string;
