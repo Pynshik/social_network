@@ -10,6 +10,7 @@ import { useHomeStyles } from './pages/Home/theme';
 import { fetchUserData } from './store/ducks/user/actionCreators';
 import { selectIsAuth, selectUserLoadingStatus } from './store/ducks/user/selector';
 import { LoadingStatus } from './store/types';
+import { Search } from './pages/Search';
 
 function App() {
   const classes = useHomeStyles();
@@ -28,10 +29,8 @@ function App() {
       history.push('/signin');
     } else if(history.location.pathname === '/') {
       history.push('/home');
-    } else {
-      history.push('/home');
     }
-  }, [isAuth, isReady])
+  }, [isAuth, isReady, history])
 
   if (!isReady) {
     return (
@@ -48,6 +47,7 @@ function App() {
         <Layout>
           <Route path='/home' component={Home} />
           <Route path='/users/:id' component={User} />
+          <Route path='/search' component={Search} />
         </Layout>
       </Switch>
     </div>
