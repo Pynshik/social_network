@@ -1,6 +1,6 @@
 import { LoginFormPropsInterface } from '../../../pages/SignIn/components/LoginModal';
 import { RegisterFormPropsInterface } from '../../../pages/SignIn/components/RegisterModal';
-import { FetchSignInActionInterface, FetchSignUpActionInterface, FetchUserDataActionInterface, SetUserDataActionInterface, SetUserLoadingStatusActionInterface, signOutActionInterface, UserActionsType } from './contracts/actionTypes';
+import { FetchSignInActionInterface, FetchSignUpActionInterface, FetchSignUpGoogleActionInterface, FetchUserDataActionInterface, SetUserDataActionInterface, SetUserLoadingStatusActionInterface, signOutActionInterface, UserActionsType } from './contracts/actionTypes';
 import { UserStateInterface } from './contracts/state';
 
 export const fetchSignIn = (payload: LoginFormPropsInterface): FetchSignInActionInterface => ({
@@ -21,6 +21,11 @@ export const fetchSignUp = (payload: RegisterFormPropsInterface): FetchSignUpAct
     payload
 });
 
+export const fetchSignUpGoogle = (payload: RegisterFormPropsInterface): FetchSignUpGoogleActionInterface => ({
+    type: UserActionsType.FETCH_SIGN_UP_GOOGLE,
+    payload
+});
+
 export const setUserData = (payload: UserStateInterface['data']): SetUserDataActionInterface => ({
     type: UserActionsType.SET_USER_DATA,
     payload
@@ -32,4 +37,4 @@ export const setUserLoadingStatus = (payload: UserStateInterface['status']): Set
 });
 
 export type UserActions = SetUserDataActionInterface | SetUserLoadingStatusActionInterface | FetchUserDataActionInterface 
-    | signOutActionInterface;
+    | signOutActionInterface | FetchSignUpGoogleActionInterface;
