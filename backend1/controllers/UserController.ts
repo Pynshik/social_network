@@ -30,16 +30,12 @@ class UserController {
     try {
       const userId = req.params.id;
 
-      console.log(userId);
-
       if (!isValidObjectId(userId)) {
         res.status(404).send();
         return;
       }
 
       const user = await UserModel.findById(userId).exec();
-
-      console.log(user);
 
       if (!user) {
         res.status(404).send();
@@ -109,6 +105,47 @@ class UserController {
       });
     }
   }
+
+  async createGoogle(req: express.Request, res: express.Response): Promise<void> {
+    try {
+      const existUser = await UserModel.findOne({email: req.body.email}).exec();
+      if(existUser) {
+        res.status(200).json({
+          status: "success",
+          data: {
+            ...existUser.toJSON(),
+            token: jwt.sign({data: existUser}, '26hgKWUB6kdbSjS', 
+              {expiresIn: '30 days'}),
+          }
+        });
+        return;
+      }
+
+      const data: UserModelInterface = {
+        email: req.body.email,
+        fullname: req.body.fullname,
+        username: req.body.username,
+        avatarUrl: req.body.avatarUrl,
+      };
+
+      const user = await UserModel.create(data);
+      
+      res.status(201).json({
+        status: "success",
+        data: {
+          ...user.toJSON(),
+          token: jwt.sign({data: user}, '26hgKWUB6kdbSjS', 
+            {expiresIn: '30 days'}),
+        },
+      });
+    } catch (error) {
+      res.status(400).json({
+        status: "error",
+        message: error,
+      });
+    }
+  }
+
 
   async getUserInfo(req: express.Request, res: express.Response): Promise<void> {
     try {
