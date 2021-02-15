@@ -33,7 +33,6 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
             position: 'relative',
             padding: '0 25px 0 20px',
             height: 50,
-            marginBottom: 15,
             borderRadius: 30,
             transition: 'background-color 0.1s ease-in-out',
         },
@@ -65,7 +64,7 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     sideMenuButton: {
         padding: theme.spacing(3.2),
         marginTop: theme.spacing(2),
-        width: 240,
+        minwidth: '100%',
     },
     sideProfile: {
         display: 'flex',
