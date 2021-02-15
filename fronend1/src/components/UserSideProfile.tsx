@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHomeStyles } from "../pages/Home/theme";
-import { Typography, Avatar } from "@material-ui/core";
+import { Typography, Avatar, Hidden } from "@material-ui/core";
 import ArrowBottomIcon from '@material-ui/icons/ExpandMore';
 import { selectUserData } from "../store/ducks/user/selector";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -41,13 +41,13 @@ export const UserSideProfile: React.FC<UserSideProfilePropsInterface> = ({
         <>
             <div onClick={handleOpenPopup} className={classes.sideProfile}>
                 <Avatar />
-
+                <Hidden smDown>
                 <div className={classes.sideProfileInfo}>
                     <b>{userData?.fullname}</b>
-                    {/* style={{ color: colors.grey[500] }} */}
                     <Typography>@{userData.username}</Typography>
                 </div>
                 <ArrowBottomIcon />
+                </Hidden>
             </div>
             <Menu
                 classes={{ paper: classes.profileMenu }}
