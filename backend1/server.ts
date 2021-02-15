@@ -15,10 +15,10 @@ import { UploadFilesCntrl } from './controllers/UploadFilesController';
 dotenv.config();
 
 const app: express.Application = express();
+const port = process.env.port || 8888;
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
-
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -30,17 +30,19 @@ app.get('/users/me', passport.authenticate('jwt', { session: false }), UserCntrl
 app.get('/users/:id', UserCntrl.show);
 
 app.get('/tweets', TweetCntrl.index);
+app.get('/tweets/search', TweetCntrl.searchTweets);
 app.get('/tweets/:id', TweetCntrl.show);
 app.get('/tweets/user/:id', TweetCntrl.getUserTweets);
 app.delete('/tweets/:id', passport.authenticate('jwt'), TweetCntrl.delete);
 app.post('/tweets', passport.authenticate('jwt'), validateTweet(createTweetValidationSchema),TweetCntrl.create);
 app.patch('/tweets/:id', passport.authenticate('jwt'), validateTweet(createTweetValidationSchema),TweetCntrl.update);
 
+app.post('/auth/google', UserCntrl.createGoogle);
 app.post('/auth/register', validate(registerValidationSchema) , UserCntrl.create);
 app.post('/auth/login', passport.authenticate('local'), UserCntrl.afterLogin);
 
 app.post('/upload', upload.single('image'), UploadFilesCntrl.upload);
 
-app.listen(process.env.PORT, (): void => {
+app.listen(port, (): void => {
     console.log('SERVER IS RUNNING!');
 });
