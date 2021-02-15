@@ -9,6 +9,7 @@ export enum UserActionsType {
     FETCH_USER_DATA = 'user/FETCH_USER_DATA',
     FETCH_SIGN_IN = 'user/FETCH_SIGN_IN',
     FETCH_SIGN_UP = 'user/FETCH_SIGN_UP',
+    FETCH_SIGN_UP_GOOGLE = 'user/FETCH_SIGN_UP_GOOGLE',
     SIGN_OUT = 'user/SIGN_OUT',
     SET_LOADING_STATUS = 'user/SET_LOADING_STATUS',
 }
@@ -24,6 +25,11 @@ export interface signOutActionInterface extends Action<UserActionsType>{
 
 export interface FetchSignUpActionInterface extends Action<UserActionsType>{
     type: UserActionsType.FETCH_SIGN_UP;
+    payload: RegisterFormPropsInterface;
+}
+
+export interface FetchSignUpGoogleActionInterface extends Action<UserActionsType>{
+    type: UserActionsType.FETCH_SIGN_UP_GOOGLE;
     payload: RegisterFormPropsInterface;
 }
 
